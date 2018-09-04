@@ -1,0 +1,92 @@
+<navbar-header></navbar-header>
+<hr>
+<div class="container">
+  <div class="col-md-12">
+    <h3> This is basic Input information...</h3>
+  </div>
+  <form (ngSubmit)="onSubmit(f);" #f="ngForm">
+    <div class="col-md-6">
+      <div class="form-input">
+        <label for="testInput">Test Input:</label>
+        <input type="text" #textInput ngModel name="testInput" class="form-control" (keyup)="onKey($event);" />
+        <p>{{testValues}}</p>
+        <!-- testValues holds value of Component property -->
+        <p>{{textInput.value}}</p>
+        <!-- #textInput holds local reference to input -->
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-input">
+        <label for="box">Box Input:</label>
+        <input type="text" class="form-control" #box (keyup)="0" />
+        <p>{{box.value}}</p>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-input">
+        <label for="normalInput">Without event binding:</label>
+        <input type="text" class="form-control" #normalInput (keyup)="onTest(normalInput.value);" />
+        <p>{{normalValue}}</p>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-input">
+        <label for="keyInput">Key event filtering (Enter and blur event):</label>
+        <input type="text" class="form-control" #keyInput (blur)="onEnter(keyInput.value);" (keyup.enter)="onEnter(keyInput.value);" />
+        <p>{{keyInputValue}}</p>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <div class="col-md-12">
+    <h3> Forms (Template Driven Forms...)</h3>
+  </div>
+  <div class="col-md-12">
+    <h4> Hero Form</h4>
+  </div>
+  <form #heroForm="ngForm" (ngSubmit)="onSubmitHero(heroForm);">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" #name="ngModel" class="form-control" id="name" [(ngModel)]="model.name" name="name"
+          required />
+        <div [hidden]="name.valid || name.pristine" class="invalid-input">
+          Name is required
+          <!-- #name property is used here -->
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="alterEgo">Alter Ego</label>
+        <input type="text" class="form-control" [(ngModel)]="model.alterEgo" name="alterEgo" id="alterEgo" required>
+      </div>
+      <div class="form-group">
+        <label for="power">Hero Power</label>
+        <select class="form-control" #power="ngModel" [(ngModel)]="model.power" name="power" id="power" required>
+          <option *ngFor="let pow of powers" [value]="pow.value">{{pow.name}}</option>
+        </select>
+        <div [hidden]="power.valid" class="invalid-input">
+          Power is required
+        </div>
+      </div>
+      <button type="submit" [disabled]="!heroForm.form.valid" class="btn btn-success">Submit</button>
+    </div>
+    <!-- <div>
+      <h2>You submitted the following:</h2>
+      <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ model.name }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Alter Ego</div>
+        <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Power</div>
+        <div class="col-xs-9 pull-left">{{ model.power }}</div>
+      </div>
+      <br>
+      <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+    </div> -->
+  </form>
+</div>

@@ -1,0 +1,327 @@
+<navbar-header></navbar-header>
+<hr>
+<div class="col-lg-12 panel" id="searchPanel" style="padding-top: 5px;">
+  <form (ngSubmit)="onSubmit(f);" #f="ngForm">
+    <div class="col-md-12" id="searchInput" ngModelGroup="searchInput">
+      <div class="form-group">
+        <div class="col-md-1" style="padding: 0;">
+          <h3 class="panel-title">Search for: </h3>
+        </div>
+        <div class="col-md-4">
+          <input ngModel name="keywords" #keywords="ngModel" class="form-control" placeholder="Search Keyword(s) (*comma separated keywords)"
+            type="text" required="required">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-1" style="padding: 0;">
+          <h3 class="panel-title">Projects: </h3>
+        </div>
+        <div class="col-md-4">
+          <select id="selectList" ngModel name="selectedProjects" (ngModelChange)='onObjectSelected($event);'
+            [(ngModel)]="searchInput.selectedProjects" #selectedProjects="ngModel" class="select-option form-control"
+            required>
+            <option *ngFor="let project of projects" [value]="project.value">{{project.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-12 panel"> </div>
+      <div class="form-group">
+        <div class="col-md-1" style="padding: 0;">
+          <h3 class="panel-title">Object Types: </h3>
+        </div>
+        <div class="col-md-4">
+          <select ngModel name="selectedObjects" class="select-option form-control" [(ngModel)]="selectedObject"
+            #selectedObjects="ngModel" required="required">
+            <option *ngFor="let objType of objectTypes" [value]="objType">{{objType}}</option>
+          </select></div>
+      </div>
+      <div class="col-lg-12 panel"> </div>
+      <div ngModelGroup="searchScope" id="searchScope">
+        <div class="form-group">
+          <div class="col-md-1" style="padding: 0;">
+            <h3 class="panel-title">Search Scope: </h3>
+          </div>
+          <div class="col-md-10">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label class="form-checkbox form-icon form-text active">
+                        <input type="checkbox" ngModel name="objectName" #workflowStatements="ngModel" [(ngModel)]="searchInput.searchScope.objectName"
+                          [value]="searchInput.searchScope.objectName" [checked]="searchInput.searchScope.objectName"
+                          id="chkObjectFiles">Object Name
+                      </label>
+                    </div>
+                  </td>
+                  <td> &nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                    <div class="checkbox">
+                      <label class="form-checkbox form-icon form-text active">
+                        <input type="checkbox" ngModel name="objectStatements" #workflowStatements="ngModel"
+                          [(ngModel)]="searchInput.searchScope.objectStatements" [value]="searchInput.searchScope.objectStatements"
+                          [checked]="searchInput.searchScope.objectStatements" id="chkObjectFilesStatements">Object
+                        Statements
+                      </label>
+                    </div>
+                  </td>
+                  <td> &nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                    <div class="checkbox">
+                      <label class="form-checkbox form-icon form-text active">
+                        <input type="checkbox" ngModel name="workflowNames" #workflowStatements="ngModel" [(ngModel)]="searchInput.searchScope.workflowNames"
+                          [value]="searchInput.searchScope.workflowNames" [checked]="searchInput.searchScope.workflowNames"
+                          id="chkWorkflowNames">Workflow Names
+                      </label>
+                    </div>
+                  </td>
+                  <td> &nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                    <div class="checkbox">
+                      <label class="form-checkbox form-icon form-text active">
+                        <input type="checkbox" ngModel name="workflowStatements" #workflowStatements="ngModel"
+                          [(ngModel)]="searchInput.searchScope.workflowStatements" [value]="searchInput.searchScope.workflowStatements"
+                          [checked]="searchInput.searchScope.workflowStatements" id="chkWorkflowStatements">Workflow
+                        Statements
+                      </label>
+                    </div>
+                  </td>
+                  <td> &nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                    <div class="checkbox">
+                      <label class="form-checkbox form-icon form-text active">
+                        <input type="checkbox" ngModel name="tags" #tags="ngModel" [(ngModel)]="searchInput.searchScope.tags"
+                          id="chkTags" [value]="searchInput.searchScope.tags" [checked]="searchInput.searchScope.tags">Tags
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="height: 10px;"></tr>
+                <tr>
+                  <td colspan="5">
+                    <table>
+                      <tr>
+                        <td *ngFor="let srcOption of searchOptions;">
+                          <div class="form-group" style="padding-right: 10px;">
+                            <div class="control-group">
+                              <label class="control control-radio">
+                                {{srcOption.name}}
+                                <input class="form-check-input" type="radio" [(ngModel)]="srcOption.value" name="wC"
+                                  [value]="srcOption.value" required />
+                                <div class="control-indicator"></div>
+                              </label>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 panel"> </div>
+      <div class="col-lg-12 panel">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-4">
+          <button [disabled]="!f.valid" class="btn btn-mint btn-labeled fa fa-search-plus" id="btnGo">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="col-lg-12 panel">
+  <hr>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">
+            <i class="glyphicon glyphicon-plus"></i>
+            Object Name - (Total Count: <span>75</span>)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+          officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+          wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+          Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+          excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+          you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo">
+            <i class="glyphicon glyphicon-plus"></i>
+            Object Statements - (Total Count: <span>41</span>)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+          officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+          wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+          Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+          excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+          you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingThree">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+            aria-expanded="false" aria-controls="collapseThree">
+            <i class="glyphicon glyphicon-plus"></i>
+            Tags - (Total Count: <span>3</span>)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+          officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+          wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+          Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+          excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+          you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="col-lg-12" id="dvResultKeyWord" style="visibility: visible; margin-top: 10px;">
+  <div class="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">Results</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-12" id="dvObjectFile" style="visibility: visible;">
+        <div class="col-sm-12" style="padding: 8px 0px 0px 0px;">
+          <div class="col-sm-10">
+            <h4>
+              <a class="accordion-toggle" data-toggle="collapse" style="color: #2a7faf;" data-parent="#accordion" href="#tblSearchFiles">
+                <i class="fa fa-angle-right" style="font-size: larger;" aria-hidden="true"></i>
+                Object Name
+              </a>
+              <span id="CntObject" style="color: #2a7faf;"> </span>
+            </h4>
+          </div>
+          <div class="col-sm-2" style="padding: 10px 0px 0px 0px; text-align: right;">
+            <button class="btn btn-primary btn-labeled fa fa-arrow-up" id="btnForFiles" style="margin-left: 46px; margin-bottom: 2px; display: none;">Export</button>
+          </div>
+        </div>
+        <table style="width: 100%;">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <div id="tblSearchFiles" class="collapse"></div>
+        <hr />
+      </div>
+      <div class="col-md-12" id="dvObjectStatement" style="visibility: visible;">
+        <div class="col-sm-12" style="padding: 0px;">
+          <div class="col-sm-10">
+            <h4>
+              <a class="accordion-toggle" data-toggle="collapse" style="color: #2a7faf;" data-parent="#accordion" href="#tblSearchFileContent">
+                <i class="fa fa-angle-right" style="font-size: larger;" aria-hidden="true"></i>
+                Object Statements
+              </a>
+              <span id="CntObjectStmts" style="color: #2a7faf;"> </span>
+            </h4>
+          </div>
+          <div class="col-sm-2" style="padding: 10px 0px 0px 0px; text-align: right;">
+            <button class="btn btn-primary btn-labeled fa fa-arrow-up" id="btnForFileContent" style="margin-left: 46px; margin-bottom: 2px; display: none;">Export</button>
+          </div>
+        </div>
+        <table style="width: 100%;">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <div id="tblSearchFileContent" class="collapse"></div>
+        <hr />
+      </div>
+      <div class="col-md-12" id="dvWokflowName" style="visibility: visible;">
+        <div class="col-sm-12" style="padding: 0px;">
+          <div class="col-sm-10">
+            <h4>
+              <a class="accordion-toggle" data-toggle="collapse" style="color: #2a7faf;" data-parent="#accordion" href="#tblSearchKeyWords">
+                <i class="fa fa-angle-right" style="font-size: larger;" aria-hidden="true"></i>
+                Workflow Names
+              </a>
+              <span id="CntWorkflowNames" style="color: #2a7faf;"> </span>
+            </h4>
+          </div>
+          <div class="col-sm-2" style="padding: 10px 0px 0px 0px; text-align: right;">
+            <button class="btn btn-primary btn-labeled fa fa-arrow-up" id="btnExportKeywords" style="margin-left: 46px; margin-bottom: 2px; display: none;">Export</button>
+          </div>
+        </div>
+        <table style="width: 100%;">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <div id="tblSearchKeyWords" class="collapse"></div>
+        <hr />
+      </div>
+      <div class="col-md-12" id="dvWorkflowStatement" style="visibility: visible;">
+        <div class="col-sm-12" style="padding: 0px;">
+          <div class="col-sm-10">
+            <h4>
+              <a class="accordion-toggle" data-toggle="collapse" style="color: #2a7faf;" data-parent="#accordion" href="#tblSearchJclPrograms">
+                <i class="fa fa-angle-right" style="font-size: larger;" aria-hidden="true"></i>
+                Workflow Statements
+              </a>
+              <span id="CntWorkflowStatements" style="color: #2a7faf;"> </span>
+            </h4>
+          </div>
+          <div class="col-sm-2" style="padding: 10px 0px 0px 0px; text-align: right;">
+            <button class="btn btn-primary btn-labeled fa fa-arrow-up" id="btnJclProgramSrc" style="margin-left: 46px; margin-bottom: 2px; display: none;">Export</button>
+          </div>
+        </div>
+        <table style="width: 100%;">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <div id="tblSearchJclPrograms" class="collapse"></div>
+        <hr />
+      </div>
+      <div class="col-md-12" id="dvTag" style="visibility: visible;">
+        <div class="col-sm-12" style="padding: 0px;">
+          <div class="col-sm-10">
+            <h4>
+              <a class="accordion-toggle" data-toggle="collapse" style="color: #2a7faf;" data-parent="#accordion" href="#tblSearchTags">
+                <i class="fa fa-angle-right" style="font-size: larger;" aria-hidden="true"></i>
+                Tags
+              </a>
+              <span id="CntTags" style="color: #2a7faf;"></span>
+            </h4>
+          </div>
+          <div class="col-sm-2" style="padding: 10px 0px 0px 0px; text-align: right;">
+            <button class="btn btn-primary btn-labeled fa fa-arrow-up" id="btnSearchTags" style="margin-left: 46px; margin-bottom: 2px; display: none;">Export</button>
+          </div>
+        </div>
+        <table style="width: 100%;">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <div id="tblSearchTags" class="collapse"></div>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,77 @@
+<div class="navbar-header">
+  <a [routerLink]="['/landing']" class="navbar-brand">
+    <img src="../../../assets/img/logo.png" alt="Logo" class="brand-icon">
+    <div class="brand-title">
+      <div class="brand-text">
+        <div class="col-md-2" style="color: #ababab; font-style: italic;">flo</div>
+        <div class="col-md-2" style="padding: 0; color: #ffc000;">Kapture</div>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="navbar-content clearfix">
+  <ul class="nav navbar-top-links pull-left">
+    <li class="tgl-menu-btn">
+      <a class="mainnav-toggle" href="#">
+        <i class="fa fa-navicon fa-lg"></i>
+      </a>
+    </li>
+    <li class="dropdown" style="margin-top: 6px;">
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <h3 class="panel-title">I want to...</h3>
+        </div>
+        <div class="col-md-8">
+          <select class="form-control" data-placeholder="Choose Customer" id="ddlSelectOption" tabindex="-1">
+            <option value="0">Select</option>
+            <option value="guide1.html">Understand a specific project?</option>
+            <option value="guide2.html">Get a visual diagram on project organization?</option>
+            <option value="guide3.html">Get a visual diagram of project workflows / processes?</option>
+            <option value="guide4.html">Look at all the processes conducted in a project?</option>
+            <option value="guide5.html">Look at a specific process (workflow) and its dependencies?</option>
+            <option value="guide6.html">See statistics of a project?</option>
+            <option value="guide7.html">Find out how an operation is conducted in a project?</option>
+            <option value="guide8.html">Find out the operation which performs operation related to a business term?</option>
+            <option value="guide9.html">Search for a term, keyword, entity, attribute within projects?</option>
+            <option value="guide10.html">Answer an impact question?</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger btn-labeled fa  fa-external-link-square" id="btnGo">Go</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <ul class="nav navbar-top-links pull-right">
+    <li id="dropdown-user" class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+        <span class="pull-right">
+          <img class="img-circle img-user media-object" src="../../../assets/img/av1.png" alt="Profile Picture">
+        </span>
+        <div class="username hidden-xs" id="userName"></div>
+      </a>
+      <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
+        <div class="pad-all bord-btm">
+          <span class="menu-title">
+            <strong>
+              <b>Total Projects:</b>
+            </strong>
+            <span class="pull-right badge badge-warning" id="cntProject"></span>
+          </span>
+        </div>
+        <ul class="head-list">
+          <li>
+            <a href="../pages/my-profile.html">
+              <i class="fa fa-user fa-fw fa-lg"></i>Profile
+            </a>
+          </li>
+        </ul>
+        <div class="pad-all text-right">
+          <a class="btn btn-primary" id="aLogout">
+            <i class="fa fa-sign-out fa-fw"></i>Logout
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

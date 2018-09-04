@@ -1,0 +1,16 @@
+.breadcrumb>li+li:before {
+  content: "";
+}
+
+.breadcrumb li,
+.breadcrumb li a {
+  color: white;
+}
+
+.breadcrumb {
+  padding: 0;
+}
+
+pre {
+  background-color: white;
+}

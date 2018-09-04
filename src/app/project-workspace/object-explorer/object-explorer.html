@@ -1,0 +1,99 @@
+<navbar-header></navbar-header>
+<div class="col-lg-12">&nbsp;</div>
+<div class="col-lg-12">
+  <div class="col-md-12" style="padding: 0;">
+    <div class="col-md-6" style="padding: 0;">
+      <div class="col-md-4">
+        <h3 class="panel-title">Object Type: </h3>
+      </div>
+      <div class="col-md-6">
+        <select class='select-option form-control' required [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event);'>
+          <option class='option' *ngFor='let option of objectTypes' [value]="option.FileTypeExtensionId">{{option.FileTypeName}}</option>
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-mint btn-labeled fa fa-external-link-square" (click)="getAllObjects();" id="btnGo">Go</button></div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-2" style="padding: 0;">
+        <h3 class="panel-title">Search for: </h3>
+      </div>
+      <div class="col-md-6">
+        <input class="form-control" [(ngModel)]='searchKeyword' type="text" placeholder="Search (*Leave empty to list all)" />
+      </div>
+      <div>
+        <button (click)="getAllObjects();" class="btn btn-primary btn-labeled fa fa-external-link-square" id="btnGo">Go</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">&nbsp;</div>
+  <div class="col-md-12">
+    <div class="col-md-2" style="padding: 0;">
+      <h3 class="panel-title">Select Object to View: </h3>
+    </div>
+    <div class="col-md-3" style="padding-left: 6px;">
+      <select autofocus="autofocus" class='select-option form-control' required [(ngModel)]='objectSelected'
+        (ngModelChange)='onObjectSelected($event);'>
+        <option class='option' *ngFor='let option of fileMasters' [value]="option.FileId">{{option.FileName}}</option>
+      </select>
+    </div>
+    <div>
+      <button class="btn btn-mint btn-labeled fa fa-external-link-square" (click)="showObjectDetails();" id="btnGo">Go</button>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <hr>
+  </div>
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item active" title="Flat source view of the Object">
+        <a class="nav-link" id="source-tab" data-toggle="tab" href="#source" role="tab" aria-controls="source"
+          aria-selected="true"><i class="fa fa-file-code-o fa-lg"></i></a>
+      </li>
+      <li class="nav-item" title="Pseudo code with treeview">
+        <a class="nav-link" id="treeView-tab" data-toggle="tab" href="#treeView" role="tab" aria-controls="treeView"
+          aria-selected="false"><i class="fa fa-indent fa-lg"></i></a>
+      </li>
+      <li class="nav-item" title="Workflow Diagram">
+        <a class="nav-link" id="workflowDiagram-tab" data-toggle="tab" href="#workflowDiagram" role="tab" aria-controls="workflowDiagram"
+          aria-selected="false"> <i class="fa fa-line-chart fa-lg"></i></a>
+      </li>
+      <li class="nav-item" title="View / Edit Object Tag(s)">
+        <a class="nav-link" id="objectTag-tab" data-toggle="tab" href="#objectTag" role="tab" aria-controls="objectTag"
+          aria-selected="false"><i class="fa fa-tags"></i></a>
+      </li>
+    </ul>
+    <div class="tab-content panel">
+      <div class="tab-pane active in panel" id="source" role="tabpanel" aria-labelledby="source-tab">
+        <search-text [searchTextConfig]="searchTextConfig"></search-text>
+      </div>
+      <div class="tab-pane fade panel" id="treeView" role="tabpanel" aria-labelledby="treeView-tab">
+        This is Tree View tab pane...
+      </div>
+      <div class="tab-pane fade panel" id="workflowDiagram" role="tabpanel" aria-labelledby="workflowDiagram-tab">
+        <mind-fusion-diagram [mindFusionConfig]="mindFusionConfig"></mind-fusion-diagram>
+      </div>
+      <div class="tab-pane fade panel" id="objectTag" role="tabpanel" aria-labelledby="objectTag-tab">
+        <div class="col-md-8 panel" style="padding: 0;">
+          <div class="col-md-12" style="padding: 0;">
+            <upload-documents [uploadConfig]="docUploadConfig"></upload-documents>
+          </div>
+          <div class="col-md-12  panel" style="padding: 0;">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let file of uploadedFiles; let i=index">
+                <div class="col-md-8" style="padding-top: 8px;">
+                  {{file}}
+                </div>
+                <div>
+                  <button class="btn btn-mint btn-labeled fa fa-download" (click)="downloadFile(file);" type="button">Download</button>
+                  &nbsp;
+                  <button class="btn btn-danger btn-labeled fa fa-trash" (click)="deleteFile(file);" type="button">Delete</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

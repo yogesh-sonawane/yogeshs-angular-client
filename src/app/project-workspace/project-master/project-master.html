@@ -1,0 +1,30 @@
+<div id="container" class="effect mainnav-lg">
+  <header id="navbar">
+    <div id="navbar-container" class="boxed">
+      <navbar-header></navbar-header>
+    </div>
+  </header>
+  <nav id="mainnav-container">
+    <div id="mainnav">
+      <left-menu></left-menu>
+    </div>
+  </nav>
+  <div id="content-container">
+    <ol class="breadcrumb" id="page-bread-crumb">
+    </ol>
+    <div id="page-content">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <search-text [searchTextConfig]="searchTextConfig"></search-text>
+        </div>
+        <div class="col-md-6">
+          <search-text [searchTextConfig]="preTextConfig"></search-text>
+        </div>
+        <div class="col-md-12">
+          <mind-fusion-diagram [mindFusionConfig]="mindFusionConfig"></mind-fusion-diagram>
+        </div>
+      </div>
+    </div>
+  </div>
+  <page-footer></page-footer>
+</div>
