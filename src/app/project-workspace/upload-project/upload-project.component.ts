@@ -11,7 +11,7 @@ export class UploadProjectComponent implements OnInit {
         multiple: true,
         uploadDirName: "UploadedProjects",
         uploadApi: {
-            url: "http://localhost:3000/api/UploadDocs/upload",
+            url: "https://pure-journey-27231.herokuapp.com:27533/api/UploadDocs/upload",
             headers: {},
             successCallback: function (d) {
                 console.log(d);
