@@ -10,6 +10,10 @@ import {FormsModule} from '@angular/forms';
 import {AdminRootComponent} from './admin-root/admin-root.component';
 import {ClientAdminComponent} from './client-admin/client-admin.component';
 import {AuthGuard} from './shared';
+import {MindFusionDirective} from './components/mf-diagram/mind-fusion.directive';
+import {SearchTextDirective} from './components/search-text/search-text.directive';
+import {UploadDocumentsDirective} from './components/upload-documents/upload-documents.directive';
+
 // import {KeywordSearchComponent} from
 // './project-workspace/keyword-search/keyword-search.component';
 
@@ -25,7 +29,13 @@ export const createTranslateLoader = (http : HttpClient) => {
 
 @NgModule({
     declarations: [
-        AppComponent, AdminRootComponent, ClientAdminComponent/* , KeywordSearchComponent, ProjectWorkspaceComponent  , ProjectMasterComponent */
+        AppComponent,
+        AdminRootComponent,
+        ClientAdminComponent,
+        MindFusionDirective,
+        UploadDocumentsDirective,
+        SearchTextDirective
+        /* , KeywordSearchComponent, ProjectWorkspaceComponent  , ProjectMasterComponent */
     ],
     imports: [
         BrowserModule,
