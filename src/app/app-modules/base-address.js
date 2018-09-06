@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 var BaseAddress = /** @class */ (function () {
   function BaseAddress() {
-    this.apiBaseAddress = "https://pure-journey-27231.herokuapp.com/api/";
+    this.apiBaseAddress = "http://localhost:3000/api/";
   }
   BaseAddress.prototype.baseAddress = function () {
-    return 'https://pure-journey-27231.herokuapp.com/api/';
+    return 'http://localhost:3000/api/';
   };
   return BaseAddress;
 }());

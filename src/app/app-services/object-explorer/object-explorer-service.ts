@@ -4,7 +4,7 @@ import {FileTypeExtensionMaster} from '../../models/index';
 import {BaseAddress, CommonUtils} from '../../app-modules/index';
 import {Observable, of} from 'rxjs';
 import {HttpParamsOptions} from '@angular/common/http/src/params';
-var baseAddress = new BaseAddress().baseAddress();
+var baseAddress =  BaseAddress.baseAddress();
 
 @Injectable()
 export class ObjectExplorerService {

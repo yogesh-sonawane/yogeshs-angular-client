@@ -4,7 +4,7 @@ import {UserMaster} from '../../models/index';
 import {BaseAddress, CommonUtils} from '../../app-modules/index';
 import {Observable, of} from 'rxjs';
 
-var baseAddress = new BaseAddress().baseAddress();
+var baseAddress = BaseAddress.baseAddress();
 
 @Injectable()
 export class UserMasterService {

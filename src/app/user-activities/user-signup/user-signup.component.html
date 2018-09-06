@@ -1,3 +1,75 @@
-<p>
-  user-signup works!
-</p>
+<div id="container" class="cls-container">
+  <div id="bg-overlay" class="bg-img demo-my-bg"></div>
+  <div class="cls-header cls-header-lg" style="background-color: #282724;">
+    <div class="cls-brand">
+      <a class="box-inline" [routerLink]="['/login']">
+        <img src="../../../assets/img/logo.png" alt="floKapture" />
+        <span class="brand-title">
+          <font color="#ababab" style="font-style: italic;">flo</font>
+          <font color="#ffc000">Kapture</font> -
+          <span class="text-thin">Login</span>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="cls-content">
+    <div class="cls-content-sm panel">
+      <div class="panel-body">
+        <p class="pad-btm" style="color: black;">Create new user account</p>
+        <form name="form" (ngSubmit)="f.form.valid && createAccount();" #f="ngForm" novalidate>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userName.valid }">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel"
+              required />
+            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userName.valid }">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel"
+              required />
+            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" email #email="ngModel"
+              required />
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userName.valid }">
+            <label for="userName">Username</label>
+            <input type="text" class="form-control" name="userName" [(ngModel)]="model.userName" #userName="ngModel"
+              required />
+            <div *ngIf="f.submitted && !userName.valid" class="help-block">Username is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+              required />
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confirmPassword.valid }">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="model.confirmPassword"
+              #confirmPassword="ngModel" required />
+            <div *ngIf="f.submitted && !confirmPassword.valid" class="help-block">Confirm Password is required</div>
+          </div>
+          <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Register</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            &nbsp;<a [routerLink]="['/user-login']" class="btn btn-danger">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  <div class="hide-fixed pull-right pad-rgt" id="divVersion"></div>
+  <p class="pad-lft">
+    &#0169; 2017 FloKapture Solutions. All Rights Reserved.
+  </p>
+</footer>
+<div class="modal">
+  <img src="../../../assets/img/ajax-loader.gif" alt="Loading..." />
+</div>

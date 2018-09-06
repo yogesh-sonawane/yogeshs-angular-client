@@ -29,35 +29,38 @@
     <div class="cls-content-sm panel">
       <div class="panel-body">
         <p class="pad-btm" style="color: black; padding-top: 5%;">Sign In to your account</p>
-        <form style="margin: 15px;" action="#" method="get" id="LoginForm" accept-charset="UTF-8">
+        <form style="margin: 15px;" (ngSubmit)="f.form.valid && userLogin(f);" #f="ngForm" accept-charset="UTF-8">
           <div class="form-group">
+            <!-- <label for="Username">Username:</label> -->
             <div class="input-group">
               <div class="input-group-addon">
                 <i class="fa fa-user"></i>
               </div>
-              <input type="text" id="TxtUserName" value="yogeshs" class="form-control" placeholder="Username">
+              <input ngModel name="UserName" type="text" class="form-control" placeholder="Username" required="required">
             </div>
           </div>
+          <div class="col-md-12" style="height: 5px;">&nbsp;</div>
           <div class="form-group">
+            <!-- <label for="Password">Password:</label> -->
             <div class="input-group">
               <div class="input-group-addon">
                 <i class="fa fa-asterisk"></i>
               </div>
-              <input type="password" autocomplete="current-password" (keypress)="userLogin();" id="TxtPassword" value="Yogesh@123" class="form-control"
-                placeholder="Password">
+              <input ngModel name="Password" type="password" autocomplete="current-password" class="form-control"
+                placeholder="Password" required>
             </div>
           </div>
           <div class="form-group">
-            <div id="tdError" class="xyz">
+            <div id="tdError" class="xyz">{{message}}
             </div>
           </div>
-
           <div class="">
             <div class="col-xs-8 text-left checkbox">
             </div>
             <div class="col-xs-4" style="padding:0;">
               <div class="form-group text-right">
-                <button class="btn btn-success text-uppercase" id="BtnLogin" (click)="userLogin();" type="button">Sign In</button>
+                <button [disabled]="!f.valid" class="btn btn-success text-uppercase" type="submit">Sign
+                  In</button>
               </div>
             </div>
           </div>

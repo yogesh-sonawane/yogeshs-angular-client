@@ -4,7 +4,7 @@ import {BaseAddress, CommonUtils} from '../../app-modules/index';
 import {Observable} from 'rxjs';
 import {HttpParamsOptions} from '@angular/common/http/src/params';
 import {FileMaster} from '../../models/file-master';
-var baseAddress = new BaseAddress().baseAddress();
+var baseAddress = BaseAddress.baseAddress();
 
 @Injectable()
 export class KeywordSearchService {

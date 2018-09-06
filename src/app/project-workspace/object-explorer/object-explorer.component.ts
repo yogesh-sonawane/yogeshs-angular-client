@@ -29,7 +29,7 @@ AfterViewInit {
         multiple: true,
         uploadDirName: "BP1400",
         uploadApi: {
-            url: "https://pure-journey-27231.herokuapp.com/api/UploadDocs/upload",
+            url: "http://localhost:3000/api/UploadDocs/upload",
             headers: {},
             successCallback: (d) => {
                 console.log(d);
